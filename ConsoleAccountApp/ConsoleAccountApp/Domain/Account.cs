@@ -33,12 +33,29 @@ namespace ConsoleAccountApp.Domain
         public void Deposit(double amount)
         {
             _balance = _balance + amount;
+            return;
         }
 
         public void Withdraw(double amount)
         {
-            _balance = _balance - amount;
+
+            if (SuffientFundsAvailabe(amount))
+            {
+                _balance = _balance - amount;
+                return;
+            }
+             Console.WriteLine("no funds to withraw");
+            
         }
+
+        private bool SuffientFundsAvailabe(double amount)
+        {
+            if (_balance - amount >= MIN_BALANCE) {
+                return true;
+            }
+            return false;
+        }
+
 
         public int AccountNo
         {
